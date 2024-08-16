@@ -18,14 +18,18 @@ app.listen(port, ()=>  //criando função de call back aeron function que recebe
 const express = require('express') //está requisitando o express
 const path = require("path"); //direciona as pastas (ler o css)
 const routes = require("./routes/routes") //
+const connectToDb = require("./database/db") //dps que connecta no db
 
+connectToDb();
 const app = express() //express é uma função e tá sendo executada dentro de app
 const port = 3000;
 
 
 app.set("view engine", "ejs"); //em um aplicativo Express.js define o motor de template que será usado para renderizar as views (páginas HTML dinâmicas)
 app.use(express.static(path.join(__dirname, "public"))); //onde estarão aquivos estáticos (criou após criar a const path)
+app.use(express.urlencoded());
 app.use(routes);
+
 
 /* apagando este pois foi criado um app.use routes  e const require routes 
 // ROTA qdo entro na rota executa um método por isso criou modulo no task controller
