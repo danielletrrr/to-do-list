@@ -10,20 +10,36 @@
 </head>
 
 <body>
-    <form action="/create" method="post"> <!-- rota q chama o create task nas rotas-->
-        <input type="text" name="task" id="task" placeholder="Insira uma tarefa">
-        <button id="addButton" type="submit">Adicionar</button> <!-- type submit faz a ação -->
-    </form>
+
+    <header>
+
+        <% if (task==null) { %>
+            <form action="/create" method="post"> <!-- rota q chama o create task nas rotas-->
+                <input type="text" name="task" id="task" placeholder="Insira uma tarefa">
+                <button id="addButton" type="submit">Adicionar</button> <!-- type submit faz a ação -->
+            </form>
+            <% } else { %>
+                <form action="/updateOne/<%=task._id %>" method="post"> <!-- rota q chama o create task nas rotas-->
+                    <input type="text" name="task" id="task" value="<%=task.task %>">
+                    <button id="addButton" type="submit">Atualizar</button> <!-- type submit faz a ação -->
+                </form>
+                <% } %>
+    </header>
 
 
-    <ul> <!-- adc o js e cria varias li dentro da ul -->
-        <% tasks.forEach((task)=> { %>
-            <li>
-                <%= task.task %> | <%= new Date(task.date).toLocaleDateString('pt-BR', { weekday: 'long' ,
-                        year: 'numeric' , month: 'long' , day: 'numeric' }) %>
-            </li>
-            <% }) %>
-    </ul>
+    <section id="tasks">
+        <ul> <!-- adc o js e cria varias li dentro da ul -->
+            <% tasksList.forEach((task)=> { %>
+                <li>
+
+                    <%= task.task %> | <%= new Date(task.date).toLocaleDateString('pt-BR', { weekday: 'long' ,
+                            year: 'numeric' , month: 'long' , day: 'numeric' }) %>
+                            <a href="/getById/<%= task._id %>">Editar</a>
+                            <a href="">Apagar</a>
+                </li>
+                <% }) %>
+        </ul>
+    </section>
 
 
     <script src="script.js"></script>
