@@ -1,10 +1,11 @@
-//
-const routes = require("express").Router(); //routes recebe req de express (porem quero a router)
-const taskController = require("../controller/TaskController")
+const routes = require("express").Router();
+const taskController = require("../controller/TaskController");
 
 routes.get("/", taskController.getAllTasks);
-routes.post("/create", taskController.createTask); //vai inserir dado no bd
+routes.post("/create", taskController.createTask);
 routes.get("/getById/:id", taskController.getById);
+routes.get("/confirmDelete/:id", taskController.confirmDelete);
+routes.post("/deleteOne/:id", taskController.deleteOneTask);
 routes.post("/updateOne/:id", taskController.updateOneTask);
 
 module.exports = routes;
