@@ -1,1 +1,0 @@
-//animações do front end
